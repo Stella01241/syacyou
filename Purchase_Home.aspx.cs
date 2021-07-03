@@ -15,7 +15,7 @@ namespace syacyou
         {
             if (!LoginHelper.HasLogined())
             {
-                Response.Write("<script>alert('請先登入');window.location.href='./Login.aspx'</script>");
+                //Response.Write("<script>alert('請先登入');window.location.href='./Login.aspx'</script>");
             }
             string currentPage = Request.QueryString["Page"];
             int total;

@@ -92,7 +92,7 @@ namespace syacyou
             Response.Redirect("Purchase_Home.aspx");
         }
 
-        protected void Create_Btn_Click(object sender, EventArgs e)
+        protected void opener_Click(object sender, EventArgs e)
         {
 
         }
