@@ -30,9 +30,6 @@ namespace syacyou
         {
             Response.Redirect("Product.aspx");
         }
-
-     
-
         protected void repInvoice1_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
             //抓取按鈕CommandName的值
@@ -66,8 +63,6 @@ namespace syacyou
                 ProductModel model = new ProductModel();
                 model.Purchase_Number = this.txtPurchase.Text; 
                 model.Shipping_Time = this.txtPurchase_Time.Text;
-                
-
 
                 DataTable IDdt = DBHelper.Purchase_Read(model.Purchase_Number);
                 if (IDdt.Rows.Count != 0)
@@ -95,6 +90,11 @@ namespace syacyou
         protected void Btn_Canel_Click(object sender, EventArgs e)
         {
             Response.Redirect("Purchase_Home.aspx");
+        }
+
+        protected void Create_Btn_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

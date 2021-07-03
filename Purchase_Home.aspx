@@ -59,7 +59,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
-       
+     
   
         <asp:Button ID="LogoutBtn" runat="server" Text="登出"  />
 
@@ -104,6 +104,7 @@
         <div>
             <uc1:PageChange runat="server" ID="PageChange" />
         </div>
+         <asp:Button ID="Button3" runat="server" Text="報表匯出" OnClick="Button3_Click" />
     </form>
 </body>
 </html>

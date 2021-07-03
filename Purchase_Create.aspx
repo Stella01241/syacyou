@@ -27,10 +27,9 @@
 
         單據編號:<asp:TextBox ID="txtPurchase" runat="server"></asp:TextBox></br>
         進貨時間:<asp:TextBox ID="txtPurchase_Time" runat="server" input Type="date"></asp:TextBox></br>
-           <div style="text-align: center">
-           
+           <div style="text-align: center">      
            </div>
-
+        <asp:Button ID="Create_Btn" runat="server" Text="新增" OnClick="Create_Btn_Click" />
         <table style="width: 80%" class="table table-striped" style="font-size: 18px; border-spacing: 10px" align="center">
             <thead>
                 <tr class="tdHeight">

@@ -84,7 +84,66 @@ namespace syacyou
         
         }
 
+   
+        protected void Export(CrystalDecisions.Shared.ExportFormatType FileType, string FileName)//使用ExportToStream方式匯出
+        {
+            //create CrystalReport object
+            CrystalDecisions.CrystalReports.Engine.ReportDocument report = new CrystalDecisions.CrystalReports.Engine.ReportDocument();
 
-    
+
+            //load report
+            report.Load(Server.MapPath("CrystalReport2.rpt"));
+
+
+            System.IO.Stream stream = report.ExportToStream(FileType);
+            byte[] bytes = new byte[stream.Length];
+            stream.Read(bytes, 0, bytes.Length);
+            stream.Seek(0, System.IO.SeekOrigin.Begin);
+
+            //export file
+            Response.ClearContent();
+            Response.ClearHeaders();
+            Response.AddHeader("content-disposition", "attachment;filename=" + FileName);//excel檔名
+
+            switch (FileType)
+            {
+                case CrystalDecisions.Shared.ExportFormatType.Excel:
+                    Response.ContentType = "application/vnd.ms-excel";
+                    break;
+                case CrystalDecisions.Shared.ExportFormatType.PortableDocFormat:
+                    Response.ContentType = "application/pdf";
+                    break;
+                case CrystalDecisions.Shared.ExportFormatType.WordForWindows:
+                    Response.ContentType = "application/vnd.ms-word";
+                    break;
+            }
+
+            Response.OutputStream.Write(bytes, 0, bytes.Length);
+            Response.Flush();
+            Response.Close();
+        }
+
+        protected void Export(CrystalDecisions.Shared.ExportFormatType FileType, string FileName, bool ExportModel)//使用ExportToHttpResponse方式匯出
+        {
+            //create CrystalReport object
+            CrystalDecisions.CrystalReports.Engine.ReportDocument report = new CrystalDecisions.CrystalReports.Engine.ReportDocument();
+
+
+            //load report
+            report.Load(Server.MapPath("CrystalReport2.rpt"));
+
+
+            report.ExportToHttpResponse(FileType, Response, ExportModel, FileName);//ExportModel{true:匯出檔案,false:用browse開啓檔案}
+        }
+
+        
+
+        protected void Button3_Click(object sender, EventArgs e)
+        {
+        
+
+            //使用ExportToHttpResponse方式匯出
+            Export(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, "test.pdf", true);
+        }
     }
 }
