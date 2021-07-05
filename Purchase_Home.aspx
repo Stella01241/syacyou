@@ -4,7 +4,6 @@
 
 
 <!DOCTYPE html>
-
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -61,8 +60,7 @@
     <form id="form1" runat="server">
      
   
-        <asp:Button ID="LogoutBtn" runat="server" Text="登出"  />
-
+        <asp:Button ID="LogoutBtn" runat="server" Text="登出" OnClick="LogoutBtn_Click1" />
         <div style="text-align: center">
             <asp:LinkButton ID="Purchase" runat="server" OnClick="Purchase_Click">進貨管理</asp:LinkButton>
             &nbsp &nbsp &nbsp  &nbsp &nbsp
@@ -86,7 +84,6 @@
                 </tr>
             </thead>
             <asp:Repeater ID="repInvoice" runat="server" OnItemCommand="repInvoice_ItemCommand">
-
                 <ItemTemplate>
                     <tr>
                         <td><%# Eval("Purchase_Number") %></td>
@@ -94,7 +91,6 @@
                         <td><%# Eval("Purchase_Quantity") %></td>
                         <td><%# Eval("Shipping_Time","{0:yyyy/MM/dd}") %></td>
                         <td><%# Eval("Purchase_Amount") %></td>
-
                         <td>
                             <asp:Button runat="server" Text="刪除" CommandName="DeleteItem" CommandArgument='<%# Eval("Purchase_Number") %>' OnClientClick="javascript:return confirm('是否刪除此訂單')" /></td>
                     </tr>

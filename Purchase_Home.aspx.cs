@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -15,7 +16,7 @@ namespace syacyou
         {
             if (!LoginHelper.HasLogined())
             {
-                //Response.Write("<script>alert('請先登入');window.location.href='./Login.aspx'</script>");
+                Response.Write("<script>alert('請先登入');window.location.href='./Login.aspx'</script>");
             }
             string currentPage = Request.QueryString["Page"];
             int total;
@@ -45,21 +46,13 @@ namespace syacyou
             Response.Redirect("Product.aspx");
         }
 
-        protected void LogoutBtn_Click(object sender, EventArgs e)
-        {
-            LoginHelper.Logout();
-            Response.Redirect("Login.aspx");
-        }
-
+     
         protected void Create_Purchase_Click(object sender, EventArgs e)
         {
             Response.Redirect("Purchase_Create.aspx");
         }
 
-        protected void Dtn_Purchase_Click(object sender, EventArgs e)
-        {
-
-        }
+  
 
         protected void repInvoice_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
@@ -127,23 +120,36 @@ namespace syacyou
         {
             //create CrystalReport object
             CrystalDecisions.CrystalReports.Engine.ReportDocument report = new CrystalDecisions.CrystalReports.Engine.ReportDocument();
-
-
-            //load report
+          //load report
             report.Load(Server.MapPath("CrystalReport2.rpt"));
-
-
             report.ExportToHttpResponse(FileType, Response, ExportModel, FileName);//ExportModel{true:匯出檔案,false:用browse開啓檔案}
         }
 
-        
-
         protected void Button3_Click(object sender, EventArgs e)
         {
-        
-
+       
             //使用ExportToHttpResponse方式匯出
             Export(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, "test.pdf", true);
         }
+
+        protected void LogoutBtn_Click1(object sender, EventArgs e)
+        {
+            Response.Redirect("Login.aspx");
+            LoginHelper.Logout();
+        }
+
+        //private void BindReport()
+        //{
+        //    string strProvider = "Server=(local);DataBase=pubs;UID=sa;PWD=";
+        //    CrystalReport2 oCR = new CrystalReport2();
+        //    Dataset1 ds = new Dataset1();
+        //    SqlConnection MyConn = new SqlConnection(strProvider);
+        //    MyConn.Open();
+        //    string strSel = "Select * from Stores";
+        //    SqlDataAdapter MyAdapter = new SqlDataAdapter(strSel, MyConn);
+        //    MyAdapter.Fill(ds, "stores");
+        //    oCR.SetDataSource(ds);
+        //    this.CrystalReportViewer1.ReportSource = oCR;
+        //}
     }
 }

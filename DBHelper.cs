@@ -127,7 +127,6 @@ namespace syacyou
         {
 
             //使用的SQL語法
-
             string queryString = $@"UPDATE Purchase SET  IsDelete = @IsDelete  Where Purchase_Number = @Purchase_Number";
 
             List<SqlParameter> parameters = new List<SqlParameter>()
